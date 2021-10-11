@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.row
+{
+  display: inline-block;
+  border: 1px solid grey;
+  font-size: 90px;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  line-height:100px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.column
+{
+    font-size: 0px;
+    min-width: 308px;
+}
+
+.winningInformation
+{
+  text-transform: uppercase;
+}
+
+.resetButton
+{
+  cursor: pointer;
+  margin: 10px;
+  padding: 1rem;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 30px;
+}

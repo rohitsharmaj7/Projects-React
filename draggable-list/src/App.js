@@ -25,8 +25,10 @@ function App() {
        return;
     }
     
+    //make the list excluding the dragged item
     const items = list.filter(item => item !== draggedItem);
 
+    //index of the item on which we are going to drag and take that item only, then put the dragged item there after it
     items.splice(index,0,draggedItem)
     setList(items)
   }

@@ -7,7 +7,6 @@ function App() {
   const [list,setList] = useState(iniList);
   const [draggedItem,setDraggedItem] = useState(null)
 
-
   function onDragStartHandler(e,idx)
   {
    setDraggedItem(list[idx])

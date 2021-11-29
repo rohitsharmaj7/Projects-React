@@ -5,7 +5,7 @@ import { signIn,signOut } from '../actions';
 
 class GoogleAuth extends React.Component {
   
-    state = { isSignedIn:null}
+    // state = { isSignedIn:null} not using the local state anymore, as redux store has been used
 
     componentDidMount()
     {

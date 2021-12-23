@@ -1,11 +1,27 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {fetchStream} from '../../actions';
 
-const StreamDelete = () => {
-    return(
-        <>
-          StreamDelete
-        </>
-    )
+class StreamDelete extends React.Component {
+   
+    componentDidMount(){
+        this.props.fetchStream(this.props.match.params.id)
+    }
+
+   render(){
+   
+         if(!this.props.stream)
+         {
+             return <>Loading...</>
+         }
+
+         return <>StreamEdit</>   
+   }
+  
 }
 
-export default StreamDelete;
+const mapStateToProps = (state,ownProps) => {
+   return {stream:state.streams[ownProps.match.params.id]}
+} 
+ 
+export default connect(mapStateToProps,{fetchStream})(StreamDelete);

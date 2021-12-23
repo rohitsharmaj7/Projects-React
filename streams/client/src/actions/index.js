@@ -54,10 +54,13 @@ export const fetchStream = (id) =>{
 }
 
 // Editing a stream
+// put - updates all the properties of a record that we update
+// pathch - update selected properties for an object that we try to update
 export const editStream = (id, formValues) =>{
     return async (dispatch) =>{
-        const response = await streams.put(`/streams/${id}`,formValues);
+        const response = await streams.patch(`/streams/${id}`,formValues);
         dispatch({type:EDIT_STREAM,payload:response.data})
+        history.push('/');
     }
 }
 

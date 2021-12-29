@@ -1,13 +1,11 @@
 import React from 'react';
-import {Route,Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
+import {withRouter} from '../withRouter';
 import Title from './Title';
 import PhotoWall from './PhotoWall';
 import AddPhoto from './AddPhoto';
 
 class Main extends React.Component{
-    
-    
-
     constructor(){
        super()
        this.state={
@@ -44,6 +42,7 @@ class Main extends React.Component{
         this.setState((state)=>({
             posts:state.posts.concat([postAdded])
         }))
+        this.props.navigate('/')
     }
 
     render()
@@ -51,18 +50,22 @@ class Main extends React.Component{
         return(
             <div>
                 <Routes>
-                    <Route exact path="/" element={
-                        <div>
+                    <Route exact path="/" element= {
+                         <div>
                             <Title title={"Photos Wall"}/>
                             <PhotoWall onRemovePhoto={this.removePhoto} posts={this.state.posts}/>
                         </div>
                     }/>
                     
-                    <Route exact path="/AddPhoto" element={<AddPhoto onAddPhoto={(addedPost)=>{this.AddPhoto(addedPost)}}/>}/> 
-                </Routes> 
+                    <Route exact path="/AddPhoto" element={
+                        <AddPhoto onAddPhoto={
+                            (addedPost)=>{this.AddPhoto(addedPost)}
+                        }/>
+                    }/> 
+                </Routes>
             </div>
         )
     }
 }
 
-export default Main;
+export default withRouter(Main);

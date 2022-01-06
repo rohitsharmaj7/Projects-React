@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 class AddPhoto extends React.Component{
 
@@ -21,7 +22,8 @@ class AddPhoto extends React.Component{
 
         if(description && imageLink)
         {
-            this.props.onAddPhoto(post)
+            this.props.addPost(post)
+            this.props.navigate('/')
         }
     }
 

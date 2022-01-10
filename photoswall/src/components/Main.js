@@ -4,10 +4,12 @@ import {withRouter} from '../withRouter';
 import Title from './Title';
 import PhotoWall from './PhotoWall';
 import AddPhoto from './AddPhoto';
+import Single from './Single';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {removePost } from '../redux/actions';
-import {addPost } from '../redux/actions';
+import {addPost} from '../redux/actions';
+import {addComment} from '../redux/actions';
 
 class Main extends React.Component{
     constructor(){
@@ -16,7 +18,6 @@ class Main extends React.Component{
 
     render()
     {
-        console.log(this.props);
         return(
             <div>
                 <Routes>
@@ -30,6 +31,10 @@ class Main extends React.Component{
                     <Route exact path="/AddPhoto" element={
                         <AddPhoto {...this.props}/>
                     }/> 
+
+                    <Route path="/single/:id" element={  
+                      <Single {...this.props}/> 
+                    }/>
                 </Routes>
             </div>
         )
@@ -39,14 +44,15 @@ class Main extends React.Component{
 function mapStateToProps(state)
 {
     return {
-        posts:state
+        posts:state.posts,
+        comments:state.comments
     }
 }
 
 // We are using this so that we can write this.props.actionCreator instead of this.props.dispatch(actioncretor)
 function mapDispatchToProps(dispatch)
 {
-    return bindActionCreators({removePost,addPost},dispatch)
+    return bindActionCreators({removePost,addPost,addComment},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Main));

@@ -14,6 +14,8 @@ function comments(state={},action)
             {
                 return {...state,[action.payload.postId]:[...state[action.payload.postId],action.payload.comment]}
             }
+        case "LOAD_COMMENTS":
+            return action.comments    
             
         default:
             return state;
@@ -29,7 +31,8 @@ function posts(state = postsData,action)
          return [...state.slice(0,action.payload), ...state.slice(action.payload+1)]
        case 'ADD_POST':
            return [...state,action.payload]  
-           
+       case 'LOAD_POSTS':
+           return action.payload
        default:
            return state;    
    }

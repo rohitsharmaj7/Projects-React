@@ -7,14 +7,21 @@ import AddPhoto from './AddPhoto';
 import Single from './Single';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {removePost } from '../redux/actions';
+import {removePost,startAddingPost,startLoadingPosts,startRemovingPost,startAddingComment,startLoadingComments } from '../redux/actions';
 import {addPost} from '../redux/actions';
 import {addComment} from '../redux/actions';
 
 class Main extends React.Component{
-    constructor(){
-       super()
+
+    state = {
+       loading:true
     }
+
+   componentDidMount()
+   {
+      this.props.startLoadingPosts().then(()=>{ this.setState({loading:false}) })   
+      this.props.startLoadingComments()   
+   }
 
     render()
     {
@@ -33,7 +40,7 @@ class Main extends React.Component{
                     }/> 
 
                     <Route path="/single/:id" element={  
-                      <Single {...this.props}/> 
+                      <Single loading={this.state.loading} {...this.props}/> 
                     }/>
                 </Routes>
             </div>
@@ -52,7 +59,7 @@ function mapStateToProps(state)
 // We are using this so that we can write this.props.actionCreator instead of this.props.dispatch(actioncretor)
 function mapDispatchToProps(dispatch)
 {
-    return bindActionCreators({removePost,addPost,addComment},dispatch)
+    return bindActionCreators({removePost,addPost,addComment,startAddingPost,startLoadingPosts,startRemovingPost,startAddingComment,startLoadingComments},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Main));
